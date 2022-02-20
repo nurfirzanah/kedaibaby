@@ -1,4 +1,5 @@
 package controller;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -33,10 +34,18 @@ public class addProductController extends HttpServlet {
         Double prodPrice = Double.parseDouble(request.getParameter("prodprice"));
         int adminId = Integer.parseInt(request.getParameter("adminId"));
         Part part = request.getPart("img");
-      
+        
+        String applicationPath = getServletContext().getRealPath("");
         // obtains the upload file part in this multipart request
-     
+        String host = request.getHeader("X-Forwarded-Proto") + "://" + "mombabystore.herokuapp.com" + "/";
          
+        String fileName = part.getSubmittedFileName();
+        String urlPathForDB = host + "images/" + fileName;
+        String savePath = applicationPath + "images" + File.separator + fileName;
+
+        new File(applicationPath + "images").mkdir();
+        part.write(savePath);
+        
         Connection conn = null; // connection to the database
         String message = null;  // message will be sent back to client
          
@@ -46,8 +55,8 @@ public class addProductController extends HttpServlet {
         	InputStream is = part.getInputStream();
         	
             // constructs SQL statement
-            String sql = "insert into product( prodName, prodQty, prodDesc, prodPrice, prodType, adminId) "
-            		+ "values('"+prodName+"', '"+prodQty+"', '"+prodDesc+"', '"+prodPrice+"','clothes', '"+adminId+"')";
+            String sql = "insert into product( prodName, prodQty, prodDesc, prodPrice, prodType, adminId, filename, savepath) "
+            		+ "values('"+prodName+"', '"+prodQty+"', '"+prodDesc+"', '"+prodPrice+"','clothes', '"+adminId+"', '"+fileName+"', '"+urlPathForDB+"')";
          
             PreparedStatement ps=null;
 			Statement stmt=null;
@@ -62,9 +71,6 @@ public class addProductController extends HttpServlet {
 			stmt2.executeUpdate(sql2);
 			
 			
-			PreparedStatement ps2 = con.prepareStatement("update product set product_img = ? where prodid = (select max(prodId) from product)");
-			ps2.setBlob(1, is);
-			ps2.executeUpdate();
            
 
         } catch (SQLException ex) {
