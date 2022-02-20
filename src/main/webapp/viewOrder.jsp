@@ -34,7 +34,7 @@
             </tr>
         </thead>
         <tbody>
-        <sql:setDataSource var = "snapshot" driver = "oracle.jdbc.driver.OracleDriver" url = "jdbc:oracle:thin:@localhost:1521:xe" user = "babyshop"  password = "system"/>
+        <sql:setDataSource var = "snapshot" driver = "org.postgresql.Driver" url = "jdbc:postgresql://ec2-54-144-165-97.compute-1.amazonaws.com:5432/d3g2s8m8pga0t5" user = "kochvwklfkakik"  password = "d62446c6444745f52e4813b08658f26773094f08d31432f622100b6d0fa9d4da"/>
 	<sql:query dataSource = "${snapshot}" var = "result">SELECT * from CUST_ORDER o join customer c on o.userId = c.userId  </sql:query>
                 <c:forEach var = "row" items = "${result.rows}">
                  
