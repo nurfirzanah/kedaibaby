@@ -41,7 +41,7 @@
 				<div class="test">
 					&nbsp;&nbsp;&nbsp;
 					<div class="cardd">
-						<img src="getImage.jsp?prodID=<%=resultset.getInt("prodID")%>"
+						<img src="images/<%=resultset.getString("fileName") %>"
 							width="100%" />
 						<h5>
 							<%
