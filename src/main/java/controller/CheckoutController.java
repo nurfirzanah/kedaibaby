@@ -59,7 +59,7 @@ public class CheckoutController extends HttpServlet {
             Statement st2 = con.createStatement();
             Statement st1 = con.createStatement();
             String sql = "update customer set USERADDRESS='"+address+"' where USERID='"+userid+"'";
-            String sql1 = "insert into Payment(PAYID, ORDERID, PAYTOTAL, PAYMETHOD) values (PAYID_SEQ.Nextval,'"+orderid+"', '"+paytotal+"', '"+payment+"')";
+            String sql1 = "insert into Payment( ORDERID, PAYTOTAL, PAYMETHOD) values ('"+orderid+"', '"+paytotal+"', '"+payment+"')";
             String sql2 = "drop table prodcart";
             st.executeUpdate(sql);
             System.out.println("Data is Successfully Updated into Customer Order Table");
