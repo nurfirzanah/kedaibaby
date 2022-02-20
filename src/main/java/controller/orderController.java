@@ -55,7 +55,7 @@ public class orderController extends HttpServlet {
 		
 		try {
 			
-			String searchQuery = "insert into cust_order(orderId, prodId, userId, orderPrice, orderQty, orderDetails, orderStatus) values (orderid_seq.NextVal, '"+prodId+"', '"+userId+"','"+orderPrice+"','"+orderQty+"', '"+size+"', 'pending')";
+			String searchQuery = "insert into cust_order( prodId, userId, orderPrice, orderQty, orderDetails, orderStatus) values ('"+prodId+"', '"+userId+"','"+orderPrice+"','"+orderQty+"', '"+size+"', 'pending')";
 			Connection con = ConnectionManager.getConnection();
 			 ResultSet rs = null; 
 			PreparedStatement ps=null;
