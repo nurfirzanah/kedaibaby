@@ -45,8 +45,8 @@ public class addToys extends HttpServlet {
         	Connection con = ConnectionManager.getConnection();
         	InputStream is = part.getInputStream();
         	
-        	 String sql = "insert into product(prodId, prodName, prodQty, prodDesc, prodPrice, prodType, adminId) "
-             		+ "values(product_seq.NextVal, '"+prodName+"', '"+prodQty+"', '"+prodDesc+"', '"+prodPrice+"','toys',  '"+adminId+"')";
+        	 String sql = "insert into product(prodName, prodQty, prodDesc, prodPrice, prodType, adminId) "
+             		+ "values('"+prodName+"', '"+prodQty+"', '"+prodDesc+"', '"+prodPrice+"','toys',  '"+adminId+"')";
           
              PreparedStatement ps=null;
  			Statement stmt=null;
