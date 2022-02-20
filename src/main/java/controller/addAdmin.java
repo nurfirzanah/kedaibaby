@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import connection.ConnectionManager;
+
 /**
  * Servlet implementation class AddCustomerController
  */
@@ -48,11 +50,13 @@ public class addAdmin extends HttpServlet {
 		int num = Integer.parseInt(request.getParameter("number"));
 		String address = request.getParameter("address");
 		int id = Integer.parseInt(request.getParameter("adminID"));
+		
+		Connection con = null;
+		
 		try {
 
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "babyshop", "system");
+			 // connects to the database
+        	Connection conn = ConnectionManager.getConnection();
 
 			Statement st = conn.createStatement();
 
@@ -60,16 +64,19 @@ public class addAdmin extends HttpServlet {
 
 			st.executeUpdate(sql);
 			out.println("Data is Successfully inserted into Customer Table");
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-
-		}
+		} catch (SQLException ex) {
+            
+            ex.printStackTrace();
+        } finally {
+            if (con != null) {
+                // closes the database connection
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
 		response.sendRedirect("ViewProductlist.jsp");
 	}
 
-}
+}}
