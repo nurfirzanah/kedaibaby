@@ -21,7 +21,7 @@
        
   </style>
 <body>
-<%@include file="header2.jsp" %>
+<%@include file="header.jsp" %>
 
 <div class="row">
   <% 
