@@ -56,7 +56,7 @@ public class AddCustomerController extends HttpServlet {
 
 			Connection con = ConnectionManager.getConnection();
 
-			Statement st = conn.createStatement();
+			Statement st = con.createStatement();
 
 			String sql = "insert into customer(USERNAME,USEREMAIL,USERPASS,USERNUM,USERADDRESS) values('"+ name + "','" + email + "','" + pass + "','" + num + "','" + address + "')";
 
