@@ -35,7 +35,7 @@
 
 
       <div class="left-column">
-        <img src="getImage.jsp?prodID=<%=resultset.getInt("prodID")%>" width="80%"/>
+        <img src="images/<%=resultset.getString("fileName") %>" width="80%"/>
       </div>
 
       <!-- Right Column -->
