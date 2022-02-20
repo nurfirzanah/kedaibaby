@@ -52,7 +52,7 @@ public class addProductController extends HttpServlet {
         try {
             // connects to the database
         	Connection con = ConnectionManager.getConnection();
-        	InputStream is = part.getInputStream();
+        	
         	
             // constructs SQL statement
             String sql = "insert into product( prodName, prodQty, prodDesc, prodPrice, prodType, adminId, filename, savepath) "
